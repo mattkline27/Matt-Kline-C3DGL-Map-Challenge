@@ -14,7 +14,7 @@ export default function appReducer(state = initialState, action) {
     case actionTypes.FETCH_LOCATIONS_SUCCESS:
       return {
         ...state,
-        locations: action.locations
+        locations: action.payload
       }
     default:
       // If this reducer doesn't recognize the action type, or doesn't
