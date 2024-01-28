@@ -3,15 +3,20 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './map.css';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
+import {fetchLocations} from "../thunkActions";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Map(props) {
+  const dispatch = useDispatch();
+  const locations = useSelector(state => state.locations);
+
   const mapContainerRef = useRef();
   const map = useRef(null);
   const [lng] = useState(props.lng || -104.991531);
   const [lat] = useState(props.lat || 39.742043);
   const [style] = useState('https://devtileserver.concept3d.com/styles/c3d_default_style/style.json');
   const [zoom] = useState(14);
-  
+
   useEffect(() => {
     if (map.current) return;
     map.current = new maplibregl.Map({
@@ -39,13 +44,23 @@ export default function Map(props) {
       const data = draw.getAll();
       console.log("data:", data);
     }
-  
+
+
+    dispatch(fetchLocations());
+
     return () => {
       map.current.remove();
     }
   }, []);
 
+    useEffect(() => {
+      if (!map.current || !locations?.length) return;
 
+      locations.forEach(location => {
+        const marker = new maplibregl.Marker()
+        marker.setLngLat([location.lng, location.lat]).addTo(map.current)
+      })
+    }, [locations])
 
   return (
       <div className="map-wrap">
