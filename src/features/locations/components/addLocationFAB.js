@@ -9,7 +9,7 @@ export default function NewLocationFAB(props) {
 
     return (
         <button className="add-location-fab" onClick={() => dispatch(toggleLocationForm())}>
-            {showForm ? <div>^</div> : <div>+</div>}
+            {showForm ? <div>x</div> : <div>+</div>}
         </button>
     )
 }
