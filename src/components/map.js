@@ -45,7 +45,6 @@ export default function Map(props) {
       console.log("data:", data);
     }
 
-
     dispatch(fetchLocations());
 
     return () => {
@@ -56,6 +55,7 @@ export default function Map(props) {
   useEffect(() => {
     if (!map.current || !locations?.length) return;
 
+    // TODO: make sure this doesn't produce duplicate location markers
     locations.forEach(location => {
       const marker = new maplibregl.Marker()
       marker.setLngLat([location.lng, location.lat]).addTo(map.current)
