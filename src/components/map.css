@@ -16,3 +16,12 @@
   bottom: 10px;
   z-index: 999;
 }
+
+.add-location-container {
+  position: absolute;
+  left: 10px;
+  top: 110px;
+  z-index: 2;
+
+}
+

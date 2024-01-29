@@ -5,10 +5,13 @@ import './map.css';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import {fetchLocations} from "../features/locations/locationThunks";
 import {useDispatch, useSelector} from "react-redux";
+import NewLocationForm from "../features/locations/components/newLocationForm";
+import NewLocationFAB from "../features/locations/components/addLocationFAB";
 
 export default function Map(props) {
   const dispatch = useDispatch();
   const locations = useSelector(state => state.locations);
+  const showNewLocationForm = useSelector(state => state.showNewLocationForm);
 
   const mapContainerRef = useRef();
   const map = useRef(null);
@@ -30,7 +33,8 @@ export default function Map(props) {
       controls: {
         polygon: true,
         trash: true,
-        point: true
+        point: true,
+
       }
     });
     map.current.addControl(draw, 'top-left');
@@ -50,7 +54,7 @@ export default function Map(props) {
     return () => {
       map.current.remove();
     }
-  }, []);
+  }, [dispatch, lat, lng, style, zoom]);
 
   useEffect(() => {
     if (!map.current || !locations?.length) return;
@@ -66,7 +70,14 @@ export default function Map(props) {
       <div className="map-wrap">
         <a href="https://www.maptiler.com" className="watermark"><img
             src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"/></a>
+
+        <div className="add-location-container">
+          <NewLocationFAB />
+          {showNewLocationForm && <NewLocationForm /> }
+        </div>
+
         <div ref={mapContainerRef} className="map"/>
+
       </div>
   );
 }

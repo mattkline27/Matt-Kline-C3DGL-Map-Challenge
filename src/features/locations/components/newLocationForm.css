@@ -1,0 +1,21 @@
+.new-location-form {
+    display: flex;
+    background-color: white;
+    border-radius: 4px;
+}
+.new-location-form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 5px;
+    width: 150px
+}
+
+.new-location-coordinate-input {
+    width: 90px;
+}
+
+.new-location-form-button {
+    margin-left: 10px
+}
