@@ -30,7 +30,8 @@ export default function Map(props) {
       controls: {
         polygon: true,
         trash: true,
-        point: true
+        point: true,
+
       }
     });
     map.current.addControl(draw, 'top-left');
@@ -50,7 +51,7 @@ export default function Map(props) {
     return () => {
       map.current.remove();
     }
-  }, []);
+  }, [dispatch, lat, lng, style, zoom]);
 
   useEffect(() => {
     if (!map.current || !locations?.length) return;
@@ -66,6 +67,9 @@ export default function Map(props) {
       <div className="map-wrap">
         <a href="https://www.maptiler.com" className="watermark"><img
             src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"/></a>
+        <button className="add-location-fab" >
+          +
+        </button>
         <div ref={mapContainerRef} className="map"/>
       </div>
   );
