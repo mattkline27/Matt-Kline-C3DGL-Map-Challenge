@@ -1,8 +1,15 @@
+const path = require('path');
+const dotenv = require('dotenv')
+
+const envPath = path.join(__dirname, '../.env')
+dotenv.config({path: envPath})
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const path = require('path');
 const app = express();
+
+const dynamoDB = require('./config/dynamoDB')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +39,13 @@ const initialLocations = [
 app.locals.idIndex = 3;
 app.locals.locations = initialLocations;
 
-app.get('/locations', (req, res) => res.send({ locations: app.locals.locations }));
+app.get('/locations', async(req, res) => {
+  const params = {
+    TableName: 'locations'
+  }
+  const locations = (await dynamoDB.scan(params).promise()).Items
+  return res.send({locations})
+});
 
 app.post('/location', (req, res) => {
   const newLocation = req.body.location
