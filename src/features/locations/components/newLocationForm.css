@@ -9,15 +9,11 @@
     align-items: flex-start;
     justify-content: flex-start;
     margin: 5px;
-    width: 200px
+    width: 150px
 }
 
 .new-location-coordinate-input {
     width: 90px;
-}
-
-.new-location-form-input-container {
-    display: flex;
 }
 
 .new-location-form-button {

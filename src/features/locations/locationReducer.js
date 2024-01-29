@@ -12,6 +12,11 @@ export default function locationReducer(state = initialState, action) {
         ...state,
         locations: action.payload
       }
+    case locationActionTypes.ADD_LOCATION_SUCCESS:
+      return {
+          ...state,
+          locations: [...state.locations, action.payload]
+      }
     case locationActionTypes.TOGGLE_NEW_LOCATION_FORM:
         return {
             ...state,

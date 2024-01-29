@@ -34,6 +34,13 @@ app.locals.locations = initialLocations;
 
 app.get('/locations', (req, res) => res.send({ locations: app.locals.locations }));
 
+app.post('/location', (req, res) => {
+  const newLocation = req.body.location
+
+  return res.send({addedLocation: newLocation})
+});
+
+
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.get('/', (req, res) => {
