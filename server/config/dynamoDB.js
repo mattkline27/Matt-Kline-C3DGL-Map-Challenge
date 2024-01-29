@@ -8,7 +8,6 @@ const awsConfig = {
 
 AWS.config.update(awsConfig)
 
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
+module.exports.documentClient = new AWS.DynamoDB.DocumentClient();
 
-module.exports = dynamoDB;
 
