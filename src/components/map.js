@@ -3,7 +3,7 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './map.css';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
-import {fetchLocations} from "../thunkActions";
+import {fetchLocations} from "../features/locations/locationThunks";
 import {useDispatch, useSelector} from "react-redux";
 
 export default function Map(props) {
@@ -53,14 +53,14 @@ export default function Map(props) {
     }
   }, []);
 
-    useEffect(() => {
-      if (!map.current || !locations?.length) return;
+  useEffect(() => {
+    if (!map.current || !locations?.length) return;
 
-      locations.forEach(location => {
-        const marker = new maplibregl.Marker()
-        marker.setLngLat([location.lng, location.lat]).addTo(map.current)
-      })
-    }, [locations])
+    locations.forEach(location => {
+      const marker = new maplibregl.Marker()
+      marker.setLngLat([location.lng, location.lat]).addTo(map.current)
+    })
+  }, [locations])
 
   return (
       <div className="map-wrap">

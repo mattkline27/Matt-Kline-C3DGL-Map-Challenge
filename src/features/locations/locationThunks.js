@@ -1,4 +1,4 @@
-import {fetchLocationsSuccess} from "./reduxActions";
+import {fetchLocationsSuccess} from "./locationActions";
 
 export const fetchLocations = () => async(dispatch) => {
     try {
