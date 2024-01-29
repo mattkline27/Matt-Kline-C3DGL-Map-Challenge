@@ -1,0 +1,14 @@
+.add-location-fab {
+    background-color: white;
+    width: 29px;
+    height: 29px;
+    display: block;
+    padding: 0;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    font-size: 20px;
+}

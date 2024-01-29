@@ -6,3 +6,9 @@ export const fetchLocationsSuccess = (locations) => {
         payload: locations
     }
 }
+
+export const toggleLocationForm = () => {
+    return {
+        type: actionTypes.TOGGLE_NEW_LOCATION_FORM
+    }
+}
