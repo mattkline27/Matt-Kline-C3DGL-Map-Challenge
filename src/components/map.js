@@ -11,6 +11,8 @@ import NewLocationFAB from "../features/locations/components/addLocationFAB";
 export default function Map(props) {
   const dispatch = useDispatch();
   const locations = useSelector(state => state.locations);
+  const oldLocations = useRef([])
+
   const showNewLocationForm = useSelector(state => state.showNewLocationForm);
 
   const mapContainerRef = useRef();
@@ -59,11 +61,16 @@ export default function Map(props) {
   useEffect(() => {
     if (!map.current || !locations?.length) return;
 
-    // TODO: make sure this doesn't produce duplicate location markers
+    const currentMarkerIds = new Set(oldLocations.current.map(oldLocation => oldLocation.id));
+
     locations.forEach(location => {
+      if (currentMarkerIds.has(location.id)) return;
+
       const marker = new maplibregl.Marker()
       marker.setLngLat([location.lng, location.lat]).addTo(map.current)
     })
+
+    oldLocations.current = locations;
   }, [locations])
 
   return (
