@@ -6,7 +6,6 @@ export const fetchLocationsSuccess = (locations) => {
         payload: locations
     }
 }
-
 export const addLocationSuccess = (location) => {
     return {
         type: actionTypes.ADD_LOCATION_SUCCESS,
