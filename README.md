@@ -1,92 +1,39 @@
-# Concept3D Interview: The Technical Challenge
 
-## Overview
+### Summary
+Welcome C3D devs! I hope your experience with my submission is enjoyable and bug free. The app is hosted at https://mk-c3d-map-challenge-2e4b5d356787.herokuapp.com/. Hosting changes can be found on deployment-and-final-changes. To run this branch, just add API_PORT=3001 to your .env file.
 
-Hello prospective candidate! In this repo, you're given a boilerplate application that contains most of the libraries you'll need to complete the challenge. It's intended to examine your abilities in the following areas:
+If you have any issues or questions before the code review please reach out at matthewwkline@gmail.com. I look forward to speaking with you soon!
 
-1. React/Redux knowledge
-2. General self-ownership of code in order to solve a problem
-3. Comfort diving into the docs in order to learn new technologies
-4. Ability to write clean, well organized, and refactored code
-5. Git usage and best practices
+### Usage
+The app runs with the default scripts: ```node server.js``` in the ```/server``` directory and ```npm start``` in the project root. The app will run on port 3000.
 
-### Instructions
+I emailed Josh a copy of the .env file for the project. Place it in the root directory to run the app locally. I've also emailed a credentials to access the AWS console. There you can view the ```locations``` DynamoDB table. Feel free to add, edit, or delete locations, just don't delete the table itself :).
 
-1. Clone this repo to your own machine (do not fork it)
-2. `cd C3DGL-Map-Challenge`
-3. Delete the `.git` directory
-4. Initialize git. Host this project as a new repo on your own Github profile
-5. `npm install`
-6. Open a separate terminal tab to run your server
-    1. `cd server && node server.js`
-7. In the root of the application run `npm start` (this will start the React application)
-8. Good luck!
+### Behavior
+The app loads saved locations to the map on page load. To add a location, click the floating button with the + below the top left menu. This will open the form to add a new location. When a location is successfully added it will drop a marker on the map and fly to the marker. If an invalid location is entered, it will display an alert explaining why.
 
-> We rely heavily upon Git. Be sure to checkout new branches for new features. Commit early and commit often.
+### Structure
+For both the server and client, I decided to group files by feature. I've found it a good way to organize code in past projects. In this case, I only had time to add one feature (locations), but I would've included a separate folder for polylines and other features if I had more time. 
 
-### Requirements
+The client has a features directory containing a ```components``` directory as well as ```actions```, ```actionTypes```, ```api```, ```reducer```, and ```thunks``` files to represent Redux flow. This is meant to mirror the root directory.
 
-1. This boilerplate effectively contains two applications: A React Redux application that has been bootstrapped with Create React App, and an Express API. You'll notice that, at the moment, the API uses `app.locals` as a data store.
+The server has a directory for the locations feature which contains a ```controller```, ```service```, and ```validator file```.
 
-    "When I navigate to the root path of the application, I see the three seeded markers displayed on the page."
-  
-    ---
-    Notes:
-    - Update the application to fetch the three locations from the api and place them on the map as markers
-    ---
+### Notes
+The biggest thing I would've like to add if I had time was better error handling. It currently sends an alert to user if an invalid location is entered. But ideally I would have made separate actions for requests and failures, structured state in a way to reflect those events, and displayed a UI for fetch and post errors. When it came time to work on error handling I realized I would've had to write messy code or restructure how location state was stored, which risked breaking the project.
 
+Other features I would've added include:
 
-2. As you'll see when you look into the Front-End boilerplate, its pretty simple. Create and add a form to the Map. The form will be used to add new markers to the map. The basic form should have fields for inputting name, latitude and longitude. This part has two aspects - client side and server side. The user story is:
-
-    "When I enter a valid latitude and longitude into the form with a name, and then press enter, I will see a new marker added to the map. If there are errors, I will see them rendered on screen. On success, the map will pan to the new marker's coordinates."
-
-    ---
-    Notes:
-
-    - Markers must persist.
-    - **Valid** latitude and longitude is important. As is the existence of a name.
-    - Verify `lat`, `lng`, and `name` server-side.
-    - Return meaningful error messages to the Front-End and render them accordingly.
-    - Use Redux and hooks to update the state of your app.
-    - When adding a new marker, the center of the map will be set to the `[lat, lng]` of the new marker.
-    ---
-
-BONUS TIME!
-
-If you have some extra time, feel free to implement any of the following. No stress.
-
-Now that you're adding your new markers and saving them, let's make some shapes! Using the `mapbox-gl-draw` library, let's make a polygon. Here's the user story:
-
-      "When I use the draw tool to make a polygon, I want to be able to save it and have it persist and load on refresh."
-
-      ---
-      Notes:
-
-      - It is important that these polygons persist.
-      - Use the `mapbox-gl-draw` library to draw your polygon.
-      - Geojson format knowledge will help.
-      ---
-
-Other Bonus Options:
-
-    - Tests are always appreciated. See what you can do here.
-    - Host your application. Heroku is free and easy. That being said, use whatever you are comfortable with.
-    - Add some other fun features with the Maplibre and Mapbox-draw-gl libraries. Be creative!
-    - Check for accessible markup.
-
-### Helpful Links:
-
-- [Express](https://expressjs.com/)
-- [AWS Docs](https://docs.aws.amazon.com/)
-- [DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)
-- [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
-- [Maplibre](https://maplibre.org/)
-- [React Redux](https://react-redux.js.org/introduction/getting-started)
-- [Redux](http://redux.js.org/)
+- Loading indicators
+- A development database
+- Polylines
+- The ability to edit and delete markers
+- Animations
+- UI flair
+- Dark mode
+- Tests
+- Accessibility features
 
 
-### Final notes:
 
-Take as long as you need to feel to do your best work. However, this challenge should realistically take no longer than approximately 5-6 hours.
 
-Have fun!
