@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_PORT} from "../../config";
 
 export const fetchLocations = async() => {
+    console.log(`http://localhost:${API_PORT}/locations`)
     const response = await axios.get(`http://localhost:${API_PORT}/locations`)
     return response.data.locations;
 }
