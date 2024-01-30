@@ -23,7 +23,7 @@ export default function Map(props) {
   const [style] = useState('https://devtileserver.concept3d.com/styles/c3d_default_style/style.json');
   const [zoom] = useState(14);
 
-  useEffect(() => {
+  const initMap = () => {
     if (map.current) return;
     map.current = new maplibregl.Map({
       container: mapContainerRef.current,
@@ -42,7 +42,7 @@ export default function Map(props) {
     });
     map.current.addControl(draw, 'top-left');
     map.current.addControl(new maplibregl.NavigationControl(), 'top-right');
-    
+
     map.current.on('draw.create', newDraw);
     map.current.on('draw.delete', newDraw);
     map.current.on('draw.update', newDraw);
@@ -51,13 +51,17 @@ export default function Map(props) {
       const data = draw.getAll();
       console.log("data:", data);
     }
+  }
+
+  useEffect(() => {
+    initMap();
 
     dispatch(fetchLocations());
 
     return () => {
       map.current.remove();
     }
-  }, [dispatch, lat, lng, style, zoom]);
+  }, []);
 
   useEffect(() => {
     if (!map.current || !locations?.length) return;
