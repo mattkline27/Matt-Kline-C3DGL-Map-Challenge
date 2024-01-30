@@ -14,7 +14,7 @@ export const fetchLocations = () => async(dispatch) => {
 
 export const addLocation = (location) => async(dispatch) => {
     try {
-        const response = await axios.post('http://localhost:3001/location', {location})
+        const response = await axios.post('http://localhost:3001/locations', {location})
         const addedLocation = response.data.addedLocation
         dispatch(addLocationSuccess(addedLocation))
 
