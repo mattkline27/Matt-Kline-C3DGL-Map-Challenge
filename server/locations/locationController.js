@@ -15,9 +15,8 @@ router.get('/', async(req, res) => {
 });
 
 router.post('/',  validateNewLocation({latitude: 'location.lat', longitude: 'location.lng', name: 'location.name'}), async (req, res) => {
-    const newLocation = {...req.body.location, id: crypto.randomUUID()}
-
     try {
+        const newLocation = {...req.body.location, id: crypto.randomUUID()}
         await createOneLocation(newLocation)
         return res.send({addedLocation: newLocation})
     }
