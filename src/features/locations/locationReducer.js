@@ -5,7 +5,7 @@ const initialState = {
   showNewLocationForm: false,
 }
 
-export default function locationReducer(state = initialState, action) {
+const locationReducer = (state = initialState, action) => {
   switch (action.type) {
     case locationActionTypes.FETCH_LOCATIONS_SUCCESS:
       return {
@@ -26,3 +26,5 @@ export default function locationReducer(state = initialState, action) {
       return state
   }
 }
+
+export default locationReducer;

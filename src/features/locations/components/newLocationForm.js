@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import './newLocationForm.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,16 +7,17 @@ import {addLocation} from "../locationThunks";
 
 export default function NewLocationForm(props) {
     const dispatch = useDispatch();
+    const formRef = useRef()
 
     const onSubmit = (e) => {
         e.preventDefault();
         const newLocation = Object.fromEntries(new FormData(e.target).entries());
         dispatch(addLocation(newLocation))
+        formRef.current?.reset();
     }
 
-    // TODO: make form reactive to mobile
     return (
-        <Form className="new-location-form" onSubmit={onSubmit}>
+        <Form ref={formRef} className="new-location-form" onSubmit={onSubmit}>
             <Form.Group  className="new-location-form-group" controlId="form-name">
                 <Form.Label>Name</Form.Label>
                 <Form.Control name="name" size="sm" type="text" placeholder="Enter Name" />
