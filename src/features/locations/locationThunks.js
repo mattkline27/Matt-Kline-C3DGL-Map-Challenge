@@ -1,5 +1,6 @@
 import {addLocationSuccess, fetchLocationsSuccess} from "./locationActions";
 import axios from "axios";
+import {map} from '../../components/map.js'
 
 export const fetchLocations = () => async(dispatch) => {
     try {
@@ -16,6 +17,11 @@ export const addLocation = (location) => async(dispatch) => {
         const response = await axios.post('http://localhost:3001/location', {location})
         const addedLocation = response.data.addedLocation
         dispatch(addLocationSuccess(addedLocation))
+
+        map.current.flyTo({
+            center: [addedLocation.lng, addedLocation.lat],
+            zoom: 14
+        });
     }
     catch (err) {
         if (err?.response?.data?.error) {

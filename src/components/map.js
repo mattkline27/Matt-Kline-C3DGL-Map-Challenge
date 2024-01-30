@@ -8,13 +8,16 @@ import {useDispatch, useSelector} from "react-redux";
 import NewLocationForm from "../features/locations/components/newLocationForm";
 import NewLocationFAB from "../features/locations/components/addLocationFAB";
 
+export const map = React.createRef();
+
 export default function Map(props) {
   const dispatch = useDispatch();
   const locations = useSelector(state => state.locations);
+  const oldLocations = useRef([])
+
   const showNewLocationForm = useSelector(state => state.showNewLocationForm);
 
   const mapContainerRef = useRef();
-  const map = useRef(null);
   const [lng] = useState(props.lng || -104.991531);
   const [lat] = useState(props.lat || 39.742043);
   const [style] = useState('https://devtileserver.concept3d.com/styles/c3d_default_style/style.json');
@@ -59,11 +62,16 @@ export default function Map(props) {
   useEffect(() => {
     if (!map.current || !locations?.length) return;
 
-    // TODO: make sure this doesn't produce duplicate location markers
+    const currentMarkerIds = new Set(oldLocations.current.map(oldLocation => oldLocation.id));
+
     locations.forEach(location => {
+      if (currentMarkerIds.has(location.id)) return;
+
       const marker = new maplibregl.Marker()
       marker.setLngLat([location.lng, location.lat]).addTo(map.current)
     })
+
+    oldLocations.current = locations;
   }, [locations])
 
   return (
