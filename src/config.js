@@ -1,1 +1,1 @@
-export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://mk-c3d-challenge-fe1081196472.herokuapp.com/';
+export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://mk-c3d-challenge-fe1081196472.herokuapp.com';
