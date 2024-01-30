@@ -2,7 +2,7 @@ import * as locationActionTypes from "./locationActionTypes";
 
 const initialState = {
   locations: [],
-  showNewLocationForm: false
+  showNewLocationForm: false,
 }
 
 export default function locationReducer(state = initialState, action) {
