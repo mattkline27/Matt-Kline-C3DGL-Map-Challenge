@@ -1,0 +1,1 @@
+export const API_PORT = process.env.NODE_ENV === 'development' ? 3001 : '';
